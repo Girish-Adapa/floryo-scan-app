@@ -35,6 +35,18 @@
   padding-bottom: 100px;
 }
 
+.ant-modal .ant-modal-content {
+  position: initial;
+  background-color: initial;
+  background-clip: initial;
+  border: initial;
+  border-radius: initial;
+  box-shadow: initial;
+  pointer-events: initial;
+  padding: initial;
+}
+
+
 
 
 

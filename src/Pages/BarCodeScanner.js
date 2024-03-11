@@ -228,21 +228,25 @@ const BarCodeScanner = () => {
       <Modal
         open={showScanner}
         onCancel={handleCloseModal}
+        closable={false}
         footer={null}
         width={300}
+        style={{ padding: "0px" }}
       >
-        <div>
+        <div style={{ width: "100%", height: "100%" }}>
           <Webcam
             audio={false}
-            // ref={webcamRef}
-            // screenshotFormat="image/jpeg"
-            videoConstraints={{ facingMode: "environment" }}
-            style={{ width: "100%" }}
+            videoConstraints={{
+              facingMode: "environment",
+              aspectRatio: 2.25 / 1, // Adjust aspect ratio as needed
+            }}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover", // Ensure the video fills the container while maintaining aspect ratio
+            }}
           />
         </div>
-        {/* <BarCodeScanner /> */}
-        {/* <div id="scanner-container" style={{ width: "100%" }}></div>
-        {scannedCode && <p>Scanned Code: {scannedCode}</p>} */}
       </Modal>
     </>
   );
