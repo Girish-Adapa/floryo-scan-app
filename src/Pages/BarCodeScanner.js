@@ -243,7 +243,7 @@ const BarCodeScanner = () => {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              maxHeight: '10%'
+              maxHeight: '100px'
             }}
           />
         </div>
