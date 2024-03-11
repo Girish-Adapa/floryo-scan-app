@@ -61,7 +61,6 @@ const BarCodeScanner = () => {
       });
 
       // Use the stream to initialize the barcode scanner
-      setShowScanner(true);
       initializeBarcodeScanner(stream);
     } catch (error) {
       console.error("Error accessing camera:", error);
@@ -72,6 +71,7 @@ const BarCodeScanner = () => {
   }
 
   function initializeBarcodeScanner(stream) {
+    setShowScanner(true);
     Quagga.init(
       {
         inputStream: {

@@ -1,73 +1,45 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Barcode Scanner</title>
-  <!-- Include QuaggaJS library -->
-  <script src="https://cdn.jsdelivr.net/npm/quagga/dist/quagga.min.js"></script>
-</head>
-<body>
-  <button onclick="handleScanBarcode()">Scan Barcode</button>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
 
-  <script>
-    async function handleScanBarcode() {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: {
-            facingMode: 'environment', // Use the rear-facing camera
-            width: { min: 640, ideal: 1280, max: 1920 }, // Video width constraints
-            height: { min: 480, ideal: 720, max: 1080 }, // Video height constraints
-            aspectRatio: 16/9 // Aspect ratio constraints
-          }
-        });
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Floryo</title>
+    <!-- Include QuaggaJS library -->
+    <script src="https://cdn.jsdelivr.net/npm/quagga/dist/quagga.min.js"></script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
 
-        // Use the stream to initialize the barcode scanner
-        initializeBarcodeScanner(stream);
-      } catch (error) {
-        console.error('Error accessing camera:', error);
-        alert('Failed to access camera. Please provide camera permission.');
-      }
-    }
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
 
-    function initializeBarcodeScanner(stream) {
-      Quagga.init({
-        inputStream: {
-          name: 'Live',
-          type: 'LiveStream',
-          target: document.querySelector('#scanner-container'), // Container to render scanner
-          constraints: {
-            width: 640, // Adjust width and height as needed
-            height: 480,
-            facingMode: 'environment' // Use the rear-facing camera
-          }
-        },
-        decoder: {
-          readers: ['ean_reader'] // Supported barcode types (EAN-13, UPC-A, etc.)
-        }
-      }, function (err) {
-        if (err) {
-          console.error('Error initializing barcode scanner:', err);
-          alert('Failed to initialize barcode scanner.');
-          return;
-        }
-        console.log('Barcode scanner initialized successfully.');
-        Quagga.start();
-      });
-
-      // Attach event listeners for successful barcode detection
-      Quagga.onDetected((data) => {
-        console.log('Barcode detected:', data.codeResult.code);
-        // Handle the detected barcode here, such as displaying it on the page
-        alert('Barcode detected: ' + data.codeResult.code);
-        // Stop the scanner after a successful detection
-        Quagga.stop();
-      });
-    }
-  </script>
-</body>
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
 </html>
-
