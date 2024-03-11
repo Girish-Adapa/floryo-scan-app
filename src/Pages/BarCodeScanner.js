@@ -3,7 +3,7 @@ import "./BarCodeScanner.css";
 import { Card, Row, Input, Button, Table, message, Modal } from "antd";
 import { SearchOutlined, ScanOutlined } from "@ant-design/icons";
 import Webcam from "react-webcam";
-import Quagga from "@ericblade/quagga2";
+// import Quagga from "@ericblade/quagga2";
 
 const BarCodeScanner = () => {
   // const webcamRef = useRef(null);
@@ -53,15 +53,11 @@ const BarCodeScanner = () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
-          facingMode: "environment", // Use the rear-facing camera
-          // width: { min: 64, ideal: 128, max: 192 }, // Video width constraints
-          // height: { min: 48, ideal: 72, max: 108 }, // Video height constraints
-          // aspectRatio: 16 / 9, // Aspect ratio constraints
+          facingMode: "environment",
         },
       });
-
-      // Use the stream to initialize the barcode scanner
-      initializeBarcodeScanner(stream);
+      setShowScanner(true);
+      console.log(stream, 'test')
     } catch (error) {
       console.error("Error accessing camera:", error);
       message.error(
@@ -70,85 +66,10 @@ const BarCodeScanner = () => {
     }
   }
 
-  function initializeBarcodeScanner(stream) {
-    setShowScanner(true);
-    Quagga.init(
-      {
-        inputStream: {
-          name: "Live",
-          type: "LiveStream",
-          target: document.querySelector("#scanner-container"), // Container to render scanner
-          constraints: {
-            width: 640, // Adjust width and height as needed
-            height: 480,
-            facingMode: "environment", // Use the rear-facing camera
-          },
-        },
-        decoder: {
-          readers: ["ean_reader"], // Supported barcode types (EAN-13, UPC-A, etc.)
-        },
-      },
-      function (err) {
-        if (err) {
-          console.error("Error initializing barcode scanner:", err);
-          message.error("Failed to initialize barcode scanner.");
-          return;
-        }
-        console.log("Barcode scanner initialized successfully.");
-        Quagga.start();
-      }
-    );
-
-    // Attach event listeners for successful barcode detection
-    Quagga.onDetected((data) => {
-      console.log("Barcode detected:", data.codeResult.code);
-      // Handle the detected barcode here, such as displaying it on the page
-      message.success("Barcode detected: " + data.codeResult.code);
-      // Stop the scanner after a successful detection
-      Quagga.stop();
-    });
-  }
-
   const handleCloseModal = () => {
     setShowScanner(false);
     window.location.reload();
   };
-
-  // const startScanner = () => {
-  //   Quagga.init(
-  //     {
-  //       inputStream: {
-  //         name: "Live",
-  //         type: "LiveStream",
-  //         target: document.querySelector("#scanner-container"),
-  //         constraints: {
-  //           facingMode: "environment", // or "user" for front camera
-  //         },
-  //       },
-  //       decoder: {
-  //         readers: ["ean_reader"], // you can add more reader types here
-  //       },
-  //     },
-  //     function (err) {
-  //       if (err) {
-  //         console.error(err);
-  //         return;
-  //       }
-  //       console.log("Initialization finished. Ready to start");
-  //       Quagga.start();
-  //     }
-  //   );
-
-  //   Quagga.onDetected((data) => {
-  //     setScannedCode(data.codeResult.code);
-  //     Quagga.stop();
-  //   });
-  // };
-
-  // const handleScanProduct = () => {
-  //   setShowScanner(true);
-  //   startScanner();
-  // };
 
   const columns = [
     {
@@ -232,7 +153,7 @@ const BarCodeScanner = () => {
         footer={null}
         width={300}
       >
-        <div style={{ width: "100%", height: "100%" }}>
+        <div id="scanner-container" style={{ width: "100%", height: "100%" }}>
           <Webcam
             audio={false}
             videoConstraints={{
@@ -243,7 +164,7 @@ const BarCodeScanner = () => {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              maxHeight: '150px'
+              maxHeight: "150px",
             }}
           />
         </div>
