@@ -1,0 +1,41 @@
+.input-container {
+  margin: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.input-label {
+  font-size: 24px;
+  margin-right: 10px;
+}
+.input-field {
+  font-size: 36px;
+  width: 100%;
+  text-transform: capitalize;
+}
+.button {
+  margin: 10px;
+}
+
+.row-color-verified {
+  background-color: #fdb823;
+}
+
+.container {
+  position: relative; 
+  background-image: url(https://floryo.com/cdn/shop/files/Footer_c545cc6f-6192-477e-b54a-ebea9e391cbe.png?v=1658440688);
+  background-size: cover; 
+  min-height: 100vh;
+}
+
+.card-container {
+  position: relative; 
+  z-index: 1;
+  background-color: transparent;
+}
+
+
+
+
+
+
