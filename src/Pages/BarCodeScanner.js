@@ -231,19 +231,19 @@ const BarCodeScanner = () => {
         closable={false}
         footer={null}
         width={300}
-        style={{ padding: "0px" }}
       >
         <div style={{ width: "100%", height: "100%" }}>
           <Webcam
             audio={false}
             videoConstraints={{
               facingMode: "environment",
-              aspectRatio: 2.25 / 1, // Adjust aspect ratio as needed
+              aspectRatio: 2.25 / 1,
             }}
             style={{
               width: "100%",
               height: "100%",
-              objectFit: "cover", // Ensure the video fills the container while maintaining aspect ratio
+              objectFit: "cover",
+              maxHeight: '10%'
             }}
           />
         </div>
