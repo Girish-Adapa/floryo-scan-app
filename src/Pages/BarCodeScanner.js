@@ -51,10 +51,19 @@ const BarCodeScanner = () => {
 
   const handleScanProduct = async () => {
     try {
-      await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+      await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: { exact: 'environment' },
+          width: { min: 640, ideal: 1280, max: 1920 }, // Video width constraints
+          height: { min: 480, ideal: 720, max: 1080 }, // Video height constraints
+          aspectRatio: { ideal: 16/9 } // Aspect ratio constraints
+        }
+      });
+  
       setShowScanner(true);
     } catch (error) {
-      message.error("Please provide camera permission");
+      console.error('Error accessing camera:', error);
+      message.error('Failed to access camera. Please provide camera permission.');
     }
   };
   
