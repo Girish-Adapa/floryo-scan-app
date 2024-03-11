@@ -1,17 +1,16 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import "./BarCodeScanner.css";
 import { Card, Row, Input, Button, Table, message, Modal } from "antd";
 import { SearchOutlined, ScanOutlined } from "@ant-design/icons";
 import Webcam from "react-webcam";
-import BarcodeScanner from "./Test";
-import Quagga from "@ericblade/quagga2";
+// import Quagga from "@ericblade/quagga2";
 
 const BarCodeScanner = () => {
-  const webcamRef = useRef(null);
-  const [orderId, setOrderId] = useState();
-  const [scannedCode, setScannedCode] = useState("");
+  // const webcamRef = useRef(null);
+  const [setOrderId] = useState();
+  // const [setScannedCode] = useState("");
   const [showScanner, setShowScanner] = useState(false);
-  const [userOrderData, setUserOrderData] = useState([
+  const [userOrderData] = useState([
     {
       code: "CKAT01510",
       is_verified: false,
@@ -52,7 +51,7 @@ const BarCodeScanner = () => {
 
   const handleScanProduct = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      await navigator.mediaDevices.getUserMedia({ video: true });
       setShowScanner(true);
     } catch (error) {
       message.error("Please provide camera permission");
@@ -64,36 +63,36 @@ const BarCodeScanner = () => {
     window.location.reload();
   };
 
-  const startScanner = () => {
-    Quagga.init(
-      {
-        inputStream: {
-          name: "Live",
-          type: "LiveStream",
-          target: document.querySelector("#scanner-container"),
-          constraints: {
-            facingMode: "environment", // or "user" for front camera
-          },
-        },
-        decoder: {
-          readers: ["ean_reader"], // you can add more reader types here
-        },
-      },
-      function (err) {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        console.log("Initialization finished. Ready to start");
-        Quagga.start();
-      }
-    );
+  // const startScanner = () => {
+  //   Quagga.init(
+  //     {
+  //       inputStream: {
+  //         name: "Live",
+  //         type: "LiveStream",
+  //         target: document.querySelector("#scanner-container"),
+  //         constraints: {
+  //           facingMode: "environment", // or "user" for front camera
+  //         },
+  //       },
+  //       decoder: {
+  //         readers: ["ean_reader"], // you can add more reader types here
+  //       },
+  //     },
+  //     function (err) {
+  //       if (err) {
+  //         console.error(err);
+  //         return;
+  //       }
+  //       console.log("Initialization finished. Ready to start");
+  //       Quagga.start();
+  //     }
+  //   );
 
-    Quagga.onDetected((data) => {
-      setScannedCode(data.codeResult.code);
-      Quagga.stop();
-    });
-  };
+  //   Quagga.onDetected((data) => {
+  //     setScannedCode(data.codeResult.code);
+  //     Quagga.stop();
+  //   });
+  // };
 
   // const handleScanProduct = () => {
   //   setShowScanner(true);
