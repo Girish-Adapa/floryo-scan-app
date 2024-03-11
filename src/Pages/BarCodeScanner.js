@@ -51,12 +51,13 @@ const BarCodeScanner = () => {
 
   const handleScanProduct = async () => {
     try {
-      await navigator.mediaDevices.getUserMedia({ video: true });
+      await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
       setShowScanner(true);
     } catch (error) {
       message.error("Please provide camera permission");
     }
   };
+  
 
   const handleCloseModal = () => {
     setShowScanner(false);
