@@ -232,7 +232,13 @@ const BarCodeScanner = () => {
         width={300}
       >
         <div>
-          {showScanner && <Webcam style={{ width: "100%" }} />}
+          <Webcam
+            audio={false}
+            // ref={webcamRef}
+            // screenshotFormat="image/jpeg"
+            videoConstraints={{ facingMode: "environment" }}
+            style={{ width: "100%" }}
+          />
         </div>
         {/* <BarCodeScanner /> */}
         {/* <div id="scanner-container" style={{ width: "100%" }}></div>

@@ -1,10 +1,10 @@
-import BarCodeReader from "./Pages/BarCodeReader";
+import BarCodeScanner from "./Pages/BarCodeScanner";
 import Footer from "./Pages/Footer";
 
 const App = () => {
   return (
     <>
-      <BarCodeReader />
+      <BarCodeScanner />
       <Footer />
     </>
   );
