@@ -31,30 +31,34 @@ const Footer = () => {
           zIndex: 2,
         }}
       >
-        Developed by Girish-Sai-Adapa. For more information,
-        contact&nbsp;:&nbsp;
-        <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-          <WhatsAppOutlined
-            style={{
-              color: "green",
-              marginRight: "8px",
-            }}
-          />
-        </a>
-        <a href={instagramLink} target="_blank" rel="noopener noreferrer">
-          <InstagramOutlined
-            style={{
-              color: "#E1306C",
-              marginRight: "8px",
-            }}
-          />
-        </a>
-        <a href={linkedInProfile} target="_blank" rel="noopener noreferrer">
-          <LinkedinOutlined style={{ color: "#0077B5", marginRight: "8px" }} />
-        </a>
-        <span>
+        Developed by Girish-Sai-Adapa
+        <div>
+          For more information, contact&nbsp;:&nbsp;
+          <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+            <WhatsAppOutlined
+              style={{
+                color: "green",
+                marginRight: "8px",
+              }}
+            />
+          </a>
+          <a href={instagramLink} target="_blank" rel="noopener noreferrer">
+            <InstagramOutlined
+              style={{
+                color: "#E1306C",
+                marginRight: "8px",
+              }}
+            />
+          </a>
+          <a href={linkedInProfile} target="_blank" rel="noopener noreferrer">
+            <LinkedinOutlined
+              style={{ color: "#0077B5", marginRight: "8px" }}
+            />
+          </a>
+        </div>
+        <div>
           Copyright @2024 <b>Floryo</b>. All rights reserved
-        </span>
+        </div>
       </Row>
     </>
   );
