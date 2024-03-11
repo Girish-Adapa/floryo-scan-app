@@ -8,7 +8,7 @@ import Quagga from "quagga";
 const BarCodeScanner = () => {
   const [orderId, setOrderId] = useState("");
   const [showScanner, setShowScanner] = useState(false);
-  const [userOrderData, setUserOrderData] = useState([]);
+  const [userOrderData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const fetchUserOrdersData = () => {
