@@ -26,7 +26,7 @@ const BarCodeScanner = () => {
 
   const vibratePhone = () => {
     if ("vibrate" in navigator) {
-      navigator.vibrate([200]);
+      navigator.vibrate([500]);
     } else {
       console.log("Vibration not supported");
     }
@@ -129,7 +129,7 @@ const BarCodeScanner = () => {
             }}
           /> */}
           <BarcodeScannerComponent
-            width={100}
+            width={300}
             height={200}
             stopStream={stopStream}
             onUpdate={(err, result) => {
