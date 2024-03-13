@@ -131,6 +131,11 @@ const BarCodeScanner = () => {
           <BarcodeScannerComponent
             width={300}
             height={200}
+            videoConstraints={{
+              facingMode: "environment",
+              aspectRatio: 2.25 / 1,
+            }}
+            torch={true}
             stopStream={stopStream}
             onUpdate={(err, result) => {
               if (result) {
