@@ -5,7 +5,6 @@ import { SearchOutlined, ScanOutlined } from "@ant-design/icons";
 import Webcam from "react-webcam";
 // import Quagga from "@ericblade/quagga2";
 
-import Footer from "./Footer";
 
 const BarCodeScanner = () => {
   // const webcamRef = useRef(null);
@@ -147,7 +146,6 @@ const BarCodeScanner = () => {
             pagination={false}
           />
 
-          <Footer />
         </Card>
       </div>
       <Modal

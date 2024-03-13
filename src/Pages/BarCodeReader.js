@@ -112,11 +112,13 @@ const BarCodeScanner = () => {
         onCancel={handleCloseModal}
         closable={false}
         footer={null}
+        width={300}
+        height={200}
       >
         <div style={{ display: "flex", justifyContent: "center" }}>
           <BarcodeScannerComponent
-            width="70%"
-            height="20%"
+            width="100%"
+            height="100%"
             // videoConstraints={{
             //   facingMode: "environment",
             //   aspectRatio: 2.25 / 1,

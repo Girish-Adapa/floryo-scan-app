@@ -20,7 +20,6 @@ const Footer = () => {
     <>
       <Row
         style={{
-          position: "fixed",
           bottom: 0,
           width: "100%",
           background: "#fdb823",
