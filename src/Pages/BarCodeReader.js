@@ -1,81 +1,35 @@
 import React, { useState } from "react";
 import "./BarCodeScanner.css";
-import { Card, Row, Input, Button, Table, message, Modal } from "antd";
+import { Card, Row, Input, Button, Table, Modal } from "antd";
 import { SearchOutlined, ScanOutlined } from "@ant-design/icons";
-import Webcam from "react-webcam";
-import Quagga from "quagga";
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 const BarCodeScanner = () => {
   const [orderId, setOrderId] = useState("");
   const [showScanner, setShowScanner] = useState(false);
   const [userOrderData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
+  const [data, setData] = useState();
+  const [stopStream, setStopStream] = useState(false);
 
-  const fetchUserOrdersData = () => {
-    setLoading(true);
-    // Perform API call to fetch user orders based on orderId
-    // Example:
-    // fetch(`/api/orders?orderId=${orderId}`)
-    //   .then(response => response.json())
-    //   .then(data => setUserOrderData(data))
-    //   .catch(error => console.error("Error fetching data:", error))
-    //   .finally(() => setLoading(false));
-  };
-
-  async function handleScanBarcode() {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode: "environment",
-        },
-      });
-      setShowScanner(true);
-      test(stream);
-    } catch (error) {
-      console.error("Error accessing camera:", error);
-      message.error("Failed to access camera. Please provide camera permission.");
-    }
-  }
-
-  const test = (stream) => {
-    Quagga.init(
-      {
-        inputStream: {
-          name: "Live",
-          type: "LiveStream",
-          target: document.querySelector("#scanner-container"),
-          constraints: {
-            facingMode: "environment",
-            aspectRatio: { min: 1, max: 2 },
-          },
-        },
-        decoder: {
-          readers: ["ean_reader", "upc_reader", "code_128_reader"],
-        },
-      },
-      (err) => {
-        if (err) {
-          console.error("Failed to initialize Quagga:", err);
-          return;
-        }
-        Quagga.start();
-      }
-    );
-
-    Quagga.onDetected((data) => {
-      const code = data.codeResult.code;
-      console.log("Barcode detected:", code);
-      // You can add code here to store the barcode data
-      handleCloseModal();
-    });
-
-    return () => {
-      Quagga.stop();
-    };
+  const handleScanBarcode = () => {
+    setShowScanner(true);
   };
 
   const handleCloseModal = () => {
     setShowScanner(false);
+  };
+
+  const fetchUserOrdersData = () => {
+    // Implement your logic for fetching user orders data
+  };
+
+  const vibratePhone = () => {
+    if ("vibrate" in navigator) {
+      navigator.vibrate([200]);
+    } else {
+      console.log("Vibration not supported");
+    }
   };
 
   const columns = [
@@ -143,7 +97,7 @@ const BarCodeScanner = () => {
               Scan Product
             </Button>
           </Row>
-
+          {data && <h1>{data}</h1>}
           <Table
             columns={columns}
             dataSource={userOrderData}
@@ -153,14 +107,14 @@ const BarCodeScanner = () => {
         </Card>
       </div>
       <Modal
-        visible={showScanner}
+        open={showScanner}
         onCancel={handleCloseModal}
         closable={false}
         footer={null}
         width={300}
       >
         <div id="scanner-container" style={{ width: "100%", height: "100%" }}>
-          <Webcam
+          {/* <Webcam
             audio={false}
             videoConstraints={{
               facingMode: "environment",
@@ -171,6 +125,20 @@ const BarCodeScanner = () => {
               height: "100%",
               objectFit: "cover",
               maxHeight: "150px",
+            }}
+          /> */}
+          <BarcodeScannerComponent
+            // width={200}
+            // height={500}
+            stopStream={stopStream}
+            onUpdate={(err, result) => {
+              if (result) {
+                setData(result.text);
+                setStopStream(true);
+                vibratePhone();
+              } else {
+                setData("Not Found");
+              }
             }}
           />
         </div>
