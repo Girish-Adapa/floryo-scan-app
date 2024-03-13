@@ -30,6 +30,7 @@ const BarCodeScanner = () => {
     } else {
       console.log("Vibration not supported");
     }
+    handleCloseModal();
   };
 
   const columns = [
@@ -128,8 +129,8 @@ const BarCodeScanner = () => {
             }}
           /> */}
           <BarcodeScannerComponent
-            // width={200}
-            // height={500}
+            width={100}
+            height={200}
             stopStream={stopStream}
             onUpdate={(err, result) => {
               if (result) {
