@@ -98,7 +98,7 @@ const BarCodeScanner = () => {
               Scan Product
             </Button>
           </Row>
-          {data && <h1>{data}</h1>}
+          {data && <h1>Scanned Id : {data}</h1>}
           <Table
             columns={columns}
             dataSource={userOrderData}
@@ -112,30 +112,14 @@ const BarCodeScanner = () => {
         onCancel={handleCloseModal}
         closable={false}
         footer={null}
-        width={300}
       >
-        <div id="scanner-container" style={{ width: "100%", height: "100%" }}>
-          {/* <Webcam
-            audio={false}
-            videoConstraints={{
-              facingMode: "environment",
-              aspectRatio: 2.25 / 1,
-            }}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              maxHeight: "150px",
-            }}
-          /> */}
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <BarcodeScannerComponent
-            width={300}
-            height={200}
+            width="70%"
             videoConstraints={{
               facingMode: "environment",
               aspectRatio: 2.25 / 1,
             }}
-            torch={true}
             stopStream={stopStream}
             onUpdate={(err, result) => {
               if (result) {
@@ -143,7 +127,7 @@ const BarCodeScanner = () => {
                 setStopStream(true);
                 vibratePhone();
               } else {
-                setData("Not Found");
+                setData();
               }
             }}
           />
