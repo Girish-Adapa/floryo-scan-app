@@ -116,6 +116,7 @@ const BarCodeScanner = () => {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <BarcodeScannerComponent
             width="70%"
+            height="20%"
             videoConstraints={{
               facingMode: "environment",
               aspectRatio: 2.25 / 1,
