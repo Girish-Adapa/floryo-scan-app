@@ -117,10 +117,10 @@ const BarCodeScanner = () => {
           <BarcodeScannerComponent
             width="70%"
             height="20%"
-            videoConstraints={{
-              facingMode: "environment",
-              aspectRatio: 2.25 / 1,
-            }}
+            // videoConstraints={{
+            //   facingMode: "environment",
+            //   aspectRatio: 2.25 / 1,
+            // }}
             stopStream={stopStream}
             onUpdate={(err, result) => {
               if (result) {

@@ -5,6 +5,8 @@ import { SearchOutlined, ScanOutlined } from "@ant-design/icons";
 import Webcam from "react-webcam";
 // import Quagga from "@ericblade/quagga2";
 
+import Footer from "./Footer";
+
 const BarCodeScanner = () => {
   // const webcamRef = useRef(null);
   const [setOrderId] = useState();
@@ -57,7 +59,7 @@ const BarCodeScanner = () => {
         },
       });
       setShowScanner(true);
-      console.log(stream, 'test')
+      console.log(stream, "test");
     } catch (error) {
       console.error("Error accessing camera:", error);
       message.error(
@@ -144,6 +146,8 @@ const BarCodeScanner = () => {
             rowClassName={getRowClassName}
             pagination={false}
           />
+
+          <Footer />
         </Card>
       </div>
       <Modal
